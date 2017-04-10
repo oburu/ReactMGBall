@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const MIGHTY_URL = 'http://gumball.wickedlysmart.com';
+    const MIGHTY_URL = '//gumball.wickedlysmart.com';
     this._interval = setInterval(() => {
       this.getDataFromURL(MIGHTY_URL);
     }, 3000);
