@@ -11,30 +11,22 @@ class App extends Component {
     this.state = { sales: [] }
   }
 
-  getDataFromURL(url){
-    fetchJsonp(url)
-    .then(response => response.json())
-    .then(sales => {
-      let longitud = this.state.sales.length;
-      if(this.state.sales[longitud-1]){
-        if(this.state.sales[longitud-1].time !== sales[1].time){
-          this.setState({
-            sales: [...this.state.sales, sales[1]]
-          });
-        }
-      } else {
+  getDataFromURL(){
+    const MGB_URL = 'https://mighty-gumball-api.herokuapp.com/mighty_gumball_api';
+    fetch(MGB_URL)
+      .then( response => response.json() )
+      .then(sale => {
+        console.log(sale);
         this.setState({
-          sales: [...this.state.sales, sales[1]]
+          sales: [...this.state.sales, sale]
         });
-      }
-    });
+      } );
   }
 
   componentDidMount() {
-    const MIGHTY_URL = '//gumball.wickedlysmart.com';
     this._interval = setInterval(() => {
-      this.getDataFromURL(MIGHTY_URL);
-    }, 3000);
+      this.getDataFromURL();
+    }, 2000);
   }
 
   componentWillUnmount() {
