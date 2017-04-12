@@ -18,7 +18,7 @@ export default class LineChart extends Component {
     var config = {
       type: 'line',
       data: {
-        labels: [],
+        labels: ['Starting'],
         datasets: [{
             label: "Sales",
             fill: true,
@@ -38,7 +38,7 @@ export default class LineChart extends Component {
             pointHoverBorderWidth: 2,
             pointRadius: 5,
             pointHitRadius: 10,
-            data: []
+            data: [0]
         }]
       },
       options: {
