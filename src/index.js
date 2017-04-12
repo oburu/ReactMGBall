@@ -4,6 +4,8 @@ import fetchJsonp from 'fetch-jsonp';
 import SalesList from './components/sales_list';
 import TotalReporting from './components/total_reporting';
 import GMap from './components/g_map';
+import LineChart from './components/line_chart';
+
 
 //Class base component
 class App extends Component {
@@ -46,6 +48,7 @@ class App extends Component {
         <h3 className="page-title">MightyGumball Inc. <small>California, USA Sales</small></h3>
         <TotalReporting sales={sales} />
         <GMap lastSale={lastSale}/>
+        <LineChart lastSale={lastSale}/>
         <SalesList sales={sales} loading={loading} />
       </div>
     );

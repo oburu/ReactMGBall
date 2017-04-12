@@ -38,6 +38,7 @@ class GMap extends Component {
     return(
       <div className="panel panel-default">
         <div className="panel-body">
+        <h4>Store location</h4>
           <div id='map' ref='map'/>
         </div>
       </div>
