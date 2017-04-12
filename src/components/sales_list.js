@@ -21,7 +21,7 @@ class SalesList extends Component {
         <div className="panel-body">
           <div className="col-xs-12">
             <h4>Total Sales</h4>
-            <p style={style} className="lead">Fetching data...</p>
+            <p style={style} className="lead">Fetching data from API...</p>
             <div className="list-group">
                 { salesItems }
             </div>

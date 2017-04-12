@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import fetchJsonp from 'fetch-jsonp';
 import SalesList from './components/sales_list';
 import TotalReporting from './components/total_reporting';
+import GMap from './components/g_map';
 
 //Class base component
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
 
     this.state = {
       sales: [],
+      lastSale: '',
       loading: 'inline'
      }
   }
@@ -20,6 +22,7 @@ class App extends Component {
     .then(response => response.json())
     .then(sale => {
       this.setState({
+        lastSale: sale,
         sales: [sale, ...this.state.sales],
         loading: 'none'
       });
@@ -29,7 +32,7 @@ class App extends Component {
   componentDidMount() {
     this._interval = setInterval(() => {
       this.getDataFromURL();
-    }, 3000);
+    }, 4000);
   }
 
   componentWillUnmount() {
@@ -37,11 +40,12 @@ class App extends Component {
   }
 
   render() {
-    let {sales, loading} = this.state;
+    let {lastSale, sales, loading} = this.state;
     return (
       <div className="container">
-        <h3 className="page-title">MightyGumball Inc. <small>California Sales</small></h3>
+        <h3 className="page-title">MightyGumball Inc. <small>California, USA Sales</small></h3>
         <TotalReporting sales={sales} />
+        <GMap lastSale={lastSale}/>
         <SalesList sales={sales} loading={loading} />
       </div>
     );

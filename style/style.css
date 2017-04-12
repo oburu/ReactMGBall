@@ -3,6 +3,7 @@
 body{
   padding-top: 2rem;
   font-family: 'Lato', sans-serif;
+  background-color: #f2f2f2;
 }
 .page-title{
   padding-bottom: 2rem;
@@ -15,7 +16,13 @@ body{
 .panel-body p{
   color:#a9a9a9;
 }
-.total-sales-panel{
-  height: 350px;
+.panel-default{
+  border-color: transparent;
+}
+.total-sales-panel .list-group{
+  height: 250px;
   overflow: scroll;
+}
+#map{
+  height:280px;
 }

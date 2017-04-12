@@ -75,6 +75,10 @@
 
 	var _total_reporting2 = _interopRequireDefault(_total_reporting);
 
+	var _g_map = __webpack_require__(164);
+
+	var _g_map2 = _interopRequireDefault(_g_map);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -96,6 +100,7 @@
 
 	    _this.state = {
 	      sales: [],
+	      lastSale: '',
 	      loading: 'inline'
 	    };
 	    return _this;
@@ -110,6 +115,7 @@
 	        return response.json();
 	      }).then(function (sale) {
 	        _this2.setState({
+	          lastSale: sale,
 	          sales: [sale].concat(_toConsumableArray(_this2.state.sales)),
 	          loading: 'none'
 	        });
@@ -122,7 +128,7 @@
 
 	      this._interval = setInterval(function () {
 	        _this3.getDataFromURL();
-	      }, 3000);
+	      }, 4000);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -133,6 +139,7 @@
 	    key: 'render',
 	    value: function render() {
 	      var _state = this.state,
+	          lastSale = _state.lastSale,
 	          sales = _state.sales,
 	          loading = _state.loading;
 
@@ -146,10 +153,11 @@
 	          _react2.default.createElement(
 	            'small',
 	            null,
-	            'California Sales'
+	            'California, USA Sales'
 	          )
 	        ),
 	        _react2.default.createElement(_total_reporting2.default, { sales: sales }),
+	        _react2.default.createElement(_g_map2.default, { lastSale: lastSale }),
 	        _react2.default.createElement(_sales_list2.default, { sales: sales, loading: loading })
 	      );
 	    }
@@ -20033,7 +20041,7 @@
 	            _react2.default.createElement(
 	              'p',
 	              { style: style, className: 'lead' },
-	              'Fetching data...'
+	              'Fetching data from API...'
 	            ),
 	            _react2.default.createElement(
 	              'div',
@@ -20094,66 +20102,194 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var TotalReporting = function TotalReporting(props) {
-	  return _react2.default.createElement(
-	    "div",
-	    { className: "panel panel-default" },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "panel-body" },
-	      _react2.default.createElement(
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TotalReporting = function (_Component) {
+	  _inherits(TotalReporting, _Component);
+
+	  function TotalReporting() {
+	    _classCallCheck(this, TotalReporting);
+
+	    return _possibleConstructorReturn(this, (TotalReporting.__proto__ || Object.getPrototypeOf(TotalReporting)).apply(this, arguments));
+	  }
+
+	  _createClass(TotalReporting, [{
+	    key: "render",
+	    value: function render() {
+	      var totalSales = { sales: 0 };
+	      var price = 1.65;
+
+	      if (this.props.sales.length > 0) {
+	        totalSales = this.props.sales.reduce(function (a, b) {
+	          return { sales: a.sales + b.sales };
+	        });
+	      }
+	      return _react2.default.createElement(
 	        "div",
-	        { className: "col-xs-12" },
+	        { className: "panel panel-default" },
 	        _react2.default.createElement(
-	          "h4",
-	          null,
-	          "Total Reporting"
-	        ),
-	        _react2.default.createElement(
-	          "p",
-	          null,
-	          "Report of gum sold in the state of California, USA. All this data is coming from a sleepy RESTful api. "
+	          "div",
+	          { className: "panel-body" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-12" },
+	            _react2.default.createElement(
+	              "h4",
+	              null,
+	              "Total Reporting"
+	            ),
+	            _react2.default.createElement(
+	              "p",
+	              null,
+	              "Report of gum sold in the state of California, USA. All this data is coming from a sleepy RESTful api. "
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-6" },
+	            _react2.default.createElement(
+	              "h5",
+	              null,
+	              "Money Income (Price: \xA3 ",
+	              price,
+	              " each)"
+	            ),
+	            _react2.default.createElement(
+	              "h1",
+	              null,
+	              "\xA3 ",
+	              (totalSales.sales * price).toFixed(2)
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-xs-6" },
+	            _react2.default.createElement(
+	              "h5",
+	              null,
+	              "Amount Sold"
+	            ),
+	            _react2.default.createElement(
+	              "h1",
+	              null,
+	              " ",
+	              totalSales.sales,
+	              " "
+	            )
+	          )
 	        )
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "col-xs-6" },
-	        _react2.default.createElement(
-	          "h5",
-	          null,
-	          "Money Income"
-	        ),
-	        _react2.default.createElement(
-	          "h1",
-	          null,
-	          "\xA3 345.00 "
-	        )
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "col-xs-6" },
-	        _react2.default.createElement(
-	          "h5",
-	          null,
-	          "Amount Sold"
-	        ),
-	        _react2.default.createElement(
-	          "h1",
-	          null,
-	          " 654 "
-	        )
-	      )
-	    )
-	  );
-	};
+	      );
+	    }
+	  }]);
+
+	  return TotalReporting;
+	}(_react.Component);
 
 	exports.default = TotalReporting;
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var GMap = function (_Component) {
+	  _inherits(GMap, _Component);
+
+	  function GMap() {
+	    _classCallCheck(this, GMap);
+
+	    return _possibleConstructorReturn(this, (GMap.__proto__ || Object.getPrototypeOf(GMap)).apply(this, arguments));
+	  }
+
+	  _createClass(GMap, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate() {
+	      return false;
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      var _nextProps$lastSale = nextProps.lastSale,
+	          latitude = _nextProps$lastSale.latitude,
+	          longitude = _nextProps$lastSale.longitude;
+
+	      var location = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+	      this.marker = new google.maps.Marker({
+	        position: location,
+	        icon: {
+	          path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
+	          fillColor: 'hotpink',
+	          fillOpacity: 1,
+	          strokeColor: 'white',
+	          strokeWeight: 1
+	        },
+	        map: this.map,
+	        animation: google.maps.Animation.DROP,
+	        title: 'hello'
+	      });
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var centerOfMap = { lat: 36.778259, lng: -119.417931 };
+	      this.map = new google.maps.Map(this.refs.map, {
+	        center: centerOfMap,
+	        mapTypeControl: false,
+	        streetViewControl: false,
+	        scrollwheel: false,
+	        zoom: 5
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'panel panel-default' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'panel-body' },
+	          _react2.default.createElement('div', { id: 'map', ref: 'map' })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return GMap;
+	}(_react.Component);
+
+	exports.default = GMap;
 
 /***/ }
 /******/ ]);
