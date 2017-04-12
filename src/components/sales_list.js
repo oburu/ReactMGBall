@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SalesListItem from './sales_list_item';
 
 class SalesList extends Component {
   constructor(props){
@@ -7,19 +8,25 @@ class SalesList extends Component {
   }
 
   render(){
-    let videoItems = this.props.sales.map((shop, i) => {
+    const salesItems = this.props.sales.map((sale, i) => {
       return (
-        <li key={i} className="list-group-item justify-content-between">
-          { shop.name } <span className="badge badge-default badge-pill">{ shop.sales }</span>
-        </li>
+        <SalesListItem key={i} sale={sale}/>
       );
-
     });
+    let style = {
+      display: this.props.loading
+    };
     return(
-      <div>
-        <ul className="list-group">
-          { videoItems }
-        </ul>
+      <div className="panel panel-default total-sales-panel">
+        <div className="panel-body">
+          <div className="col-xs-12">
+            <h4>Total Sales</h4>
+            <p style={style} className="lead">Fetching data...</p>
+            <div className="list-group">
+                { salesItems }
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

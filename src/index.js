@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import fetchJsonp from 'fetch-jsonp';
 import SalesList from './components/sales_list';
+import TotalReporting from './components/total_reporting';
 
 //Class base component
 class App extends Component {
@@ -19,7 +20,7 @@ class App extends Component {
     .then(response => response.json())
     .then(sale => {
       this.setState({
-        sales: [...this.state.sales, sale],
+        sales: [sale, ...this.state.sales],
         loading: 'none'
       });
     });
@@ -36,15 +37,12 @@ class App extends Component {
   }
 
   render() {
-    let sales = this.state.sales;
-    let style = {
-      display: this.state.loading
-    };
+    let {sales, loading} = this.state;
     return (
       <div className="container">
-        <h3 className="page-title">Mighty gumball inc. <small>California Sales</small></h3>
-        <p style={style} className="lead">Loading...</p>
-        <SalesList sales={this.state.sales} />
+        <h3 className="page-title">MightyGumball Inc. <small>California Sales</small></h3>
+        <TotalReporting sales={sales} />
+        <SalesList sales={sales} loading={loading} />
       </div>
     );
   }

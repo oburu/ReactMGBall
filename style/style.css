@@ -1,6 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+
 body{
   padding-top: 2rem;
+  font-family: 'Lato', sans-serif;
 }
 .page-title{
   padding-bottom: 2rem;
+}
+.panel-body h1{
+  font-weight: 300;
+  color:#a9a9a9;
+  margin-top: 0;
+}
+.panel-body p{
+  color:#a9a9a9;
+}
+.total-sales-panel{
+  height: 350px;
+  overflow: scroll;
 }
