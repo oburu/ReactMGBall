@@ -47,8 +47,8 @@ class App extends Component {
       <div className="container">
         <h3 className="page-title">MightyGumball Inc. <small>California, USA Sales</small></h3>
         <TotalReporting sales={sales} />
-        <GMap lastSale={lastSale}/>
         <LineChart lastSale={lastSale}/>
+        <GMap lastSale={lastSale}/>
         <SalesList sales={sales} loading={loading} />
       </div>
     );

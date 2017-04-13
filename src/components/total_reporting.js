@@ -11,19 +11,32 @@ class TotalReporting extends Component {
       });
     }
     return (
-      <div className="panel panel-default">
-        <div className="panel-body">
-          <div className="col-xs-12">
-            <h4>Total Reporting</h4>
-            <p>Report of gum sold in the state of California, USA. All this data is coming from a sleepy RESTful api. </p>
+      <div className="row">
+        <div className="col-sm-8">
+          <div className="panel panel-default">
+            <div className="panel-body">
+              <div className="col-xs-12">
+                <h4>Total Reporting</h4>
+                <p>Report of gum sold in the state of California, USA. All this data is coming from a sleepy RESTful api. </p>
+              </div>
+              <div className="col-xs-6">
+                <h5>Money Income (Price: £ {price} each)</h5>
+                <h1>£ {(totalSales.sales * price).toFixed(2)}</h1>
+              </div>
+              <div className="col-xs-6">
+                <h5>Amount Sold</h5>
+                <h1> {totalSales.sales} </h1>
+              </div>
+            </div>
           </div>
-          <div className="col-xs-6">
-            <h5>Money Income (Price: £ {price} each)</h5>
-            <h1>£ {(totalSales.sales * price).toFixed(2)}</h1>
-          </div>
-          <div className="col-xs-6">
-            <h5>Amount Sold</h5>
-            <h1> {totalSales.sales} </h1>
+        </div>
+        <div className="col-sm-4">
+          <div className="panel panel-default">
+            <div className="panel-body">
+                <h5>Amount Sold</h5>
+                <p>All this data is coming from a sleepy RESTful api. </p>
+                <h1> {totalSales.sales} </h1>
+            </div>
           </div>
         </div>
       </div>
