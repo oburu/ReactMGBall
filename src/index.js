@@ -6,8 +6,6 @@ import TotalReporting from './components/total_reporting';
 import GMap from './components/g_map';
 import LineChart from './components/line_chart';
 
-
-//Class base component
 class App extends Component {
   constructor(props){
     super(props);
@@ -47,9 +45,15 @@ class App extends Component {
       <div className="container">
         <h3 className="page-title">MightyGumball Inc. <small>California, USA Sales</small></h3>
         <TotalReporting sales={sales} />
-        <LineChart lastSale={lastSale}/>
+        <div className="flex-container">
+          <div className="col col-left">
+            <LineChart lastSale={lastSale}/>
+          </div>
+          <div className="col col-right">
+            <SalesList sales={sales} loading={loading} />
+          </div>
+        </div>
         <GMap lastSale={lastSale}/>
-        <SalesList sales={sales} loading={loading} />
       </div>
     );
   }

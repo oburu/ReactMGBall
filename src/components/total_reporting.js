@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class TotalReporting extends Component {
+export default class TotalReporting extends Component {
   render(){
     let totalSales = {sales:0};
     let price = 1.65;
@@ -11,38 +11,29 @@ class TotalReporting extends Component {
       });
     }
     return (
-      <div className="row">
-        <div className="col-sm-8">
-          <div className="panel panel-default">
-            <div className="panel-body">
-              <div className="col-xs-12">
-                <h4>Total Reporting</h4>
-                <p>Report of gum sold in the state of California, USA. All this data is coming from a sleepy RESTful api. </p>
-              </div>
-              <div className="col-xs-6">
-                <h5>Money Income (Price: £ {price} each)</h5>
-                <h1>£ {(totalSales.sales * price).toFixed(2)}</h1>
-              </div>
-              <div className="col-xs-6">
-                <h5>Amount Sold</h5>
-                <h1> {totalSales.sales} </h1>
-              </div>
+      <div className="flex-container">
+        <div className="col col-left">
+          <h4>Total Reporting</h4>
+          <p>Report of gum sold in the state of California, USA. All this data is coming from a sleepy RESTful api. </p>
+          <div className="row">
+            <div className="col-xs-6">
+              <h5>Money Income (Price: £ {price} each)</h5>
+              <h1>£ {(totalSales.sales * price).toFixed(2)}</h1>
+            </div>
+            <div className="col-xs-6">
+              <h5>Amount Sold</h5>
+              <h1> {totalSales.sales} </h1>
             </div>
           </div>
         </div>
-        <div className="col-sm-4">
-          <div className="panel panel-default">
-            <div className="panel-body">
-                <h5>Amount Sold</h5>
-                <p>All this data is coming from a sleepy RESTful api. </p>
-                <h1> {totalSales.sales} </h1>
-            </div>
-          </div>
+        <div className="col col-right">
+          <h4>Best Seller</h4>
+          <p>This is the faster selling store in the area.</p>
+          <h4 className="best-seller"> <a href="#">Los Angeles <span className="pull-right">34</span></a> </h4>
+          <p>Westwood, CA 96137, USA</p>
         </div>
       </div>
     );
   }
 
 }
-
-export default TotalReporting;

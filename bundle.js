@@ -93,7 +93,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	//Class base component
 	var App = function (_Component) {
 	  _inherits(App, _Component);
 
@@ -161,9 +160,21 @@
 	          )
 	        ),
 	        _react2.default.createElement(_total_reporting2.default, { sales: sales }),
-	        _react2.default.createElement(_line_chart2.default, { lastSale: lastSale }),
-	        _react2.default.createElement(_g_map2.default, { lastSale: lastSale }),
-	        _react2.default.createElement(_sales_list2.default, { sales: sales, loading: loading })
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'flex-container' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col col-left' },
+	            _react2.default.createElement(_line_chart2.default, { lastSale: lastSale })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col col-right' },
+	            _react2.default.createElement(_sales_list2.default, { sales: sales, loading: loading })
+	          )
+	        ),
+	        _react2.default.createElement(_g_map2.default, { lastSale: lastSale })
 	      );
 	    }
 	  }]);
@@ -20031,29 +20042,21 @@
 	      };
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'panel panel-default total-sales-panel' },
+	        { className: 'total-sales-panel' },
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          'Total Sales'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { style: style, className: 'lead' },
+	          'Fetching data from API...'
+	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'col-xs-12' },
-	            _react2.default.createElement(
-	              'h4',
-	              null,
-	              'Total Sales'
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              { style: style, className: 'lead' },
-	              'Fetching data from API...'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'list-group' },
-	              salesItems
-	            )
-	          )
+	          { className: 'list-group' },
+	          salesItems
 	        )
 	      );
 	    }
@@ -20143,84 +20146,47 @@
 	      }
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "row" },
+	        { className: "flex-container" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: "col-sm-8" },
+	          { className: "col col-left" },
+	          _react2.default.createElement(
+	            "h4",
+	            null,
+	            "Total Reporting"
+	          ),
+	          _react2.default.createElement(
+	            "p",
+	            null,
+	            "Report of gum sold in the state of California, USA. All this data is coming from a sleepy RESTful api. "
+	          ),
 	          _react2.default.createElement(
 	            "div",
-	            { className: "panel panel-default" },
+	            { className: "row" },
 	            _react2.default.createElement(
 	              "div",
-	              { className: "panel-body" },
+	              { className: "col-xs-6" },
 	              _react2.default.createElement(
-	                "div",
-	                { className: "col-xs-12" },
-	                _react2.default.createElement(
-	                  "h4",
-	                  null,
-	                  "Total Reporting"
-	                ),
-	                _react2.default.createElement(
-	                  "p",
-	                  null,
-	                  "Report of gum sold in the state of California, USA. All this data is coming from a sleepy RESTful api. "
-	                )
+	                "h5",
+	                null,
+	                "Money Income (Price: \xA3 ",
+	                price,
+	                " each)"
 	              ),
 	              _react2.default.createElement(
-	                "div",
-	                { className: "col-xs-6" },
-	                _react2.default.createElement(
-	                  "h5",
-	                  null,
-	                  "Money Income (Price: \xA3 ",
-	                  price,
-	                  " each)"
-	                ),
-	                _react2.default.createElement(
-	                  "h1",
-	                  null,
-	                  "\xA3 ",
-	                  (totalSales.sales * price).toFixed(2)
-	                )
-	              ),
-	              _react2.default.createElement(
-	                "div",
-	                { className: "col-xs-6" },
-	                _react2.default.createElement(
-	                  "h5",
-	                  null,
-	                  "Amount Sold"
-	                ),
-	                _react2.default.createElement(
-	                  "h1",
-	                  null,
-	                  " ",
-	                  totalSales.sales,
-	                  " "
-	                )
+	                "h1",
+	                null,
+	                "\xA3 ",
+	                (totalSales.sales * price).toFixed(2)
 	              )
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "col-sm-4" },
-	          _react2.default.createElement(
-	            "div",
-	            { className: "panel panel-default" },
+	            ),
 	            _react2.default.createElement(
 	              "div",
-	              { className: "panel-body" },
+	              { className: "col-xs-6" },
 	              _react2.default.createElement(
 	                "h5",
 	                null,
 	                "Amount Sold"
-	              ),
-	              _react2.default.createElement(
-	                "p",
-	                null,
-	                "All this data is coming from a sleepy RESTful api. "
 	              ),
 	              _react2.default.createElement(
 	                "h1",
@@ -20230,6 +20196,41 @@
 	                " "
 	              )
 	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "col col-right" },
+	          _react2.default.createElement(
+	            "h4",
+	            null,
+	            "Best Seller"
+	          ),
+	          _react2.default.createElement(
+	            "p",
+	            null,
+	            "This is the faster selling store in the area."
+	          ),
+	          _react2.default.createElement(
+	            "h4",
+	            { className: "best-seller" },
+	            " ",
+	            _react2.default.createElement(
+	              "a",
+	              { href: "#" },
+	              "Los Angeles ",
+	              _react2.default.createElement(
+	                "span",
+	                { className: "pull-right" },
+	                "34"
+	              )
+	            ),
+	            " "
+	          ),
+	          _react2.default.createElement(
+	            "p",
+	            null,
+	            "Westwood, CA 96137, USA"
 	          )
 	        )
 	      );
@@ -20318,17 +20319,13 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'panel panel-default' },
+	        { className: 'col' },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Store location'
-	          ),
-	          _react2.default.createElement('div', { id: 'map', ref: 'map' })
-	        )
+	          'h4',
+	          null,
+	          'Store location'
+	        ),
+	        _react2.default.createElement('div', { id: 'map', ref: 'map' })
 	      );
 	    }
 	  }]);
@@ -20419,7 +20416,8 @@
 	        },
 	        options: {
 	          responsive: true,
-	          maintainAspectRatio: false,
+	          maintainAspectRatio: true,
+	          bezierCurve: false,
 	          scales: {
 	            yAxes: [{
 	              display: true,
@@ -20455,17 +20453,13 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'panel panel-default' },
+	        null,
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'panel-body' },
-	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Live updates'
-	          ),
-	          _react2.default.createElement('canvas', { ref: 'lineChart', width: '400', height: '200' })
-	        )
+	          'h4',
+	          null,
+	          'Live updates'
+	        ),
+	        _react2.default.createElement('canvas', { ref: 'lineChart', width: '400', height: '200' })
 	      );
 	    }
 	  }]);

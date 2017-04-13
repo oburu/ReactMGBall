@@ -43,7 +43,8 @@ export default class LineChart extends Component {
       },
       options: {
         responsive: true,
-    		maintainAspectRatio: false,
+    		maintainAspectRatio: true,
+        bezierCurve: false,
     		scales: {
     			yAxes: [{
     					display: true,
@@ -76,11 +77,9 @@ export default class LineChart extends Component {
   }
   render(){
     return(
-      <div className="panel panel-default">
-        <div className="panel-body">
+      <div>
         <h4>Live updates</h4>
-          <canvas ref="lineChart" width="400" height="200"></canvas>
-        </div>
+        <canvas ref="lineChart" width="400" height="200"></canvas>
       </div>
     );
   }

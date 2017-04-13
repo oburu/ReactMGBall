@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class GMap extends Component {
+export default class GMap extends Component {
   shouldComponentUpdate(){
     return false;
   }
@@ -36,14 +36,10 @@ class GMap extends Component {
 
   render(){
     return(
-      <div className="panel panel-default">
-        <div className="panel-body">
+      <div className="col">
         <h4>Store location</h4>
           <div id='map' ref='map'/>
-        </div>
       </div>
     );
   }
 }
-
-export default GMap;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SalesListItem from './sales_list_item';
 
-class SalesList extends Component {
+export default class SalesList extends Component {
   constructor(props){
     super(props);
 
@@ -17,20 +17,14 @@ class SalesList extends Component {
       display: this.props.loading
     };
     return(
-      <div className="panel panel-default total-sales-panel">
-        <div className="panel-body">
-          <div className="col-xs-12">
-            <h4>Total Sales</h4>
-            <p style={style} className="lead">Fetching data from API...</p>
-            <div className="list-group">
-                { salesItems }
-            </div>
-          </div>
+      <div className="total-sales-panel">
+        <h4>Total Sales</h4>
+        <p style={style} className="lead">Fetching data from API...</p>
+        <div className="list-group">
+            { salesItems }
         </div>
       </div>
     );
   }
 
 }
-
-export default SalesList;
