@@ -6,7 +6,7 @@ export default class GMap extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    let {latitude, longitude} = nextProps.lastSale;
+    let {latitude, longitude , name, sales} = nextProps.lastSale;
     let location = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
     this.marker = new google.maps.Marker({
       position: location,
@@ -19,7 +19,7 @@ export default class GMap extends Component {
   		},
       map: this.map,
       animation: google.maps.Animation.DROP,
-      title: 'hello'
+      title: name + ': ' + sales + ' gums'
     });
   }
 
@@ -37,7 +37,7 @@ export default class GMap extends Component {
   render(){
     return(
       <div className="col">
-        <h4>Store location</h4>
+        <h4>Stores' location</h4>
           <div id='map' ref='map'/>
       </div>
     );

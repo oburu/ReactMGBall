@@ -20046,7 +20046,7 @@
 	        _react2.default.createElement(
 	          'h4',
 	          null,
-	          'Total Sales'
+	          'Total sales'
 	        ),
 	        _react2.default.createElement(
 	          'p',
@@ -20153,7 +20153,7 @@
 	          _react2.default.createElement(
 	            "h4",
 	            null,
-	            "Total Reporting"
+	            "Total reporting"
 	          ),
 	          _react2.default.createElement(
 	            "p",
@@ -20204,7 +20204,7 @@
 	          _react2.default.createElement(
 	            "h4",
 	            null,
-	            "Best Seller"
+	            "Best seller"
 	          ),
 	          _react2.default.createElement(
 	            "p",
@@ -20285,7 +20285,9 @@
 	    value: function componentWillReceiveProps(nextProps) {
 	      var _nextProps$lastSale = nextProps.lastSale,
 	          latitude = _nextProps$lastSale.latitude,
-	          longitude = _nextProps$lastSale.longitude;
+	          longitude = _nextProps$lastSale.longitude,
+	          name = _nextProps$lastSale.name,
+	          sales = _nextProps$lastSale.sales;
 
 	      var location = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
 	      this.marker = new google.maps.Marker({
@@ -20299,7 +20301,7 @@
 	        },
 	        map: this.map,
 	        animation: google.maps.Animation.DROP,
-	        title: 'hello'
+	        title: name + ': ' + sales + ' gums'
 	      });
 	    }
 	  }, {
@@ -20323,7 +20325,7 @@
 	        _react2.default.createElement(
 	          'h4',
 	          null,
-	          'Store location'
+	          'Stores\' location'
 	        ),
 	        _react2.default.createElement('div', { id: 'map', ref: 'map' })
 	      );

@@ -13,7 +13,7 @@ export default class TotalReporting extends Component {
     return (
       <div className="flex-container">
         <div className="col col-left">
-          <h4>Total Reporting</h4>
+          <h4>Total reporting</h4>
           <p>Report of gum sold in the state of California, USA. All this data is coming from a sleepy RESTful api. </p>
           <div className="row">
             <div className="col-xs-6">
@@ -27,7 +27,7 @@ export default class TotalReporting extends Component {
           </div>
         </div>
         <div className="col col-right">
-          <h4>Best Seller</h4>
+          <h4>Best seller</h4>
           <p>This is the faster selling store in the area.</p>
           <h4 className="best-seller"> <a href="#">Los Angeles <span className="pull-right">34</span></a> </h4>
           <p>Westwood, CA 96137, USA</p>

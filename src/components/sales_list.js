@@ -18,7 +18,7 @@ export default class SalesList extends Component {
     };
     return(
       <div className="total-sales-panel">
-        <h4>Total Sales</h4>
+        <h4>Total sales</h4>
         <p style={style} className="lead">Fetching data from API...</p>
         <div className="list-group">
             { salesItems }
