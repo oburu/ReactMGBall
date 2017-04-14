@@ -14,13 +14,14 @@ body{
 .col h1{
   font-weight: 300;
   color:#ff9000;
+  /*color:#d581e7;*/
   margin-top: 0;
 }
 .col p{
   color:#a9a9a9;
 }
 
-.total-sales-panel .list-group{
+.total-sales-panel .list{
   height: 310px;
   overflow: scroll;
 }
@@ -37,9 +38,7 @@ body{
 .col{
   background-color: white;
   padding:20px;
-
   margin-bottom: 2%;
-
 }
 .col-left{
   margin-right: 2%;
@@ -51,7 +50,36 @@ body{
 a{
   color:#2185e7;
 }
+
+/* -------   List Stuff ---------*/
+.list-item{
+	padding: 15px 10px;
+	border:1px solid #eaeaea;
+	width:100%;
+	height:50px;
+	margin-bottom: 10px;
+	float:left;
+	display:block;
+}
+.list-item:hover{
+	background-color: #eaeaea;
+	cursor:pointer;
+}
+a.list-item{
+	color: #a9a9a9;
+}
+a.list-item:nth-child(1){
+	color:#2185e7!important;
+}
+
+
+/* ----- */
+
+
 @media (max-width: 600px) {
+  .col{
+    margin-bottom: 5%;
+  }
   .col-left{
     margin-right: 0;
     width: 100%;

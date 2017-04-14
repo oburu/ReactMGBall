@@ -166,7 +166,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'col col-left' },
-	            _react2.default.createElement(_line_chart2.default, { lastSale: lastSale })
+	            _react2.default.createElement(_line_chart2.default, { lastSale: lastSale, loading: loading })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -20025,10 +20025,10 @@
 	var SalesList = function (_Component) {
 	  _inherits(SalesList, _Component);
 
-	  function SalesList(props) {
+	  function SalesList() {
 	    _classCallCheck(this, SalesList);
 
-	    return _possibleConstructorReturn(this, (SalesList.__proto__ || Object.getPrototypeOf(SalesList)).call(this, props));
+	    return _possibleConstructorReturn(this, (SalesList.__proto__ || Object.getPrototypeOf(SalesList)).apply(this, arguments));
 	  }
 
 	  _createClass(SalesList, [{
@@ -20040,13 +20040,14 @@
 	      var style = {
 	        display: this.props.loading
 	      };
+
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'total-sales-panel' },
 	        _react2.default.createElement(
 	          'h4',
 	          null,
-	          'Total sales'
+	          'Latest sales'
 	        ),
 	        _react2.default.createElement(
 	          'p',
@@ -20055,7 +20056,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'list-group' },
+	          { className: 'list' },
 	          salesItems
 	        )
 	      );
@@ -20090,11 +20091,16 @@
 
 	  return _react2.default.createElement(
 	    "a",
-	    { href: "#", className: "list-group-item" },
+	    { href: "#", className: "list-item" },
 	    name,
-	    " store sold ",
-	    sales,
-	    " gums"
+	    " ",
+	    _react2.default.createElement(
+	      "span",
+	      { className: "pull-right" },
+	      " ",
+	      sales,
+	      " "
+	    )
 	  );
 	};
 
@@ -20165,7 +20171,7 @@
 	            { className: "row" },
 	            _react2.default.createElement(
 	              "div",
-	              { className: "col-xs-6" },
+	              { className: "col-sm-6" },
 	              _react2.default.createElement(
 	                "h5",
 	                null,
@@ -20182,7 +20188,7 @@
 	            ),
 	            _react2.default.createElement(
 	              "div",
-	              { className: "col-xs-6" },
+	              { className: "col-sm-6" },
 	              _react2.default.createElement(
 	                "h5",
 	                null,

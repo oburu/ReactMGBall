@@ -47,7 +47,7 @@ class App extends Component {
         <TotalReporting sales={sales} />
         <div className="flex-container">
           <div className="col col-left">
-            <LineChart lastSale={lastSale}/>
+            <LineChart lastSale={lastSale} loading={loading}/>
           </div>
           <div className="col col-right">
             <SalesList sales={sales} loading={loading} />

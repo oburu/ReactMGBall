@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import SalesListItem from './sales_list_item';
 
 export default class SalesList extends Component {
-  constructor(props){
-    super(props);
-
-  }
-
   render(){
     const salesItems = this.props.sales.map((sale, i) => {
       return (
@@ -16,15 +11,15 @@ export default class SalesList extends Component {
     let style = {
       display: this.props.loading
     };
+
     return(
       <div className="total-sales-panel">
-        <h4>Total sales</h4>
+        <h4>Latest sales</h4>
         <p style={style} className="lead">Fetching data from API...</p>
-        <div className="list-group">
-            { salesItems }
+        <div className="list">
+          {salesItems}
         </div>
       </div>
     );
   }
-
 }
