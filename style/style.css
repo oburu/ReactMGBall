@@ -32,7 +32,7 @@ body{
   flex-wrap: wrap;
 }
 .best-seller{
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .col{
   background-color: white;
@@ -70,7 +70,24 @@ a.list-item{
 a.list-item:nth-child(1){
 	color:#2185e7!important;
 }
-
+.modal-overlay{
+	position:fixed;
+	background-color: rgba(0,0,0,.6);
+	display:block;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+}
+.modal{
+	text-align: center;
+	position:relative;
+	width:60%;
+	margin: 30px auto;
+	background-color: #fff;
+	padding:20px;
+	display:block;
+}
 
 /* ----- */
 

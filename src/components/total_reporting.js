@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import BestSeller from './best-seller';
 
 export default class TotalReporting extends Component {
   render(){
@@ -10,6 +11,7 @@ export default class TotalReporting extends Component {
         return {sales: a.sales + b.sales}
       });
     }
+    
     return (
       <div className="flex-container">
         <div className="col col-left">
@@ -26,14 +28,9 @@ export default class TotalReporting extends Component {
             </div>
           </div>
         </div>
-        <div className="col col-right">
-          <h4>Best seller</h4>
-          <p>This is the faster selling store in the area.</p>
-          <h4 className="best-seller"> <a href="#">Los Angeles <span className="pull-right">34</span></a> </h4>
-          <p>Westwood, CA 96137, USA</p>
-        </div>
+        <BestSeller sales ={ this.props.sales} />
       </div>
-    );
+    )
   }
 
 }
