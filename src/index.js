@@ -43,7 +43,7 @@ class App extends Component {
     let {lastSale, sales, loading} = this.state;
     return (
       <div className="container">
-        <h3 className="page-title">MightyGumball Inc. <small>California, USA Sales</small></h3>
+        <h3 className="page-title">MightyGumball Inc. <br/><small>California, USA Sales</small></h3>
         <TotalReporting sales={sales} />
         <div className="flex-container">
           <div className="col col-left">

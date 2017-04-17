@@ -5,13 +5,16 @@ export default class TotalReporting extends Component {
   render(){
     let totalSales = {sales:0};
     let price = 1.65;
+    let bestSeller = {};
 
     if(this.props.sales.length > 0){
+      bestSeller = this.props.sales[0];
       totalSales = this.props.sales.reduce((a, b) => {
         return {sales: a.sales + b.sales}
       });
+
     }
-    
+
     return (
       <div className="flex-container">
         <div className="col col-left">
@@ -28,7 +31,7 @@ export default class TotalReporting extends Component {
             </div>
           </div>
         </div>
-        <BestSeller sales ={ this.props.sales} />
+        <BestSeller bSeller={bestSeller} />
       </div>
     )
   }

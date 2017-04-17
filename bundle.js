@@ -153,6 +153,7 @@
 	          'h3',
 	          { className: 'page-title' },
 	          'MightyGumball Inc. ',
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            'small',
 	            null,
@@ -20294,8 +20295,10 @@
 	    value: function render() {
 	      var totalSales = { sales: 0 };
 	      var price = 1.65;
+	      var bestSeller = {};
 
 	      if (this.props.sales.length > 0) {
+	        bestSeller = this.props.sales[0];
 	        totalSales = this.props.sales.reduce(function (a, b) {
 	          return { sales: a.sales + b.sales };
 	        });
@@ -20355,7 +20358,7 @@
 	            )
 	          )
 	        ),
-	        _react2.default.createElement(_bestSeller2.default, { sales: this.props.sales })
+	        _react2.default.createElement(_bestSeller2.default, { bSeller: bestSeller })
 	      );
 	    }
 	  }]);
@@ -20398,19 +20401,33 @@
 	    var _this = _possibleConstructorReturn(this, (BestSeller.__proto__ || Object.getPrototypeOf(BestSeller)).call(this));
 
 	    _this.state = {
-	      address: 'Loading address',
-	      saleSorted: {}
+	      address: 'puta address',
+	      best: {
+	        name: 'puto name',
+	        sales: '4 mierdas'
+	      }
 	    };
 	    _this.getAddress = _this.getAddress.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(BestSeller, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        best: {
+	          name: nextProps.bSeller.name,
+	          sales: nextProps.bSeller.sales
+	        }
+	      });
+	      this.getAddress(nextProps.bSeller.latitude, nextProps.bSeller.longitude);
+	    }
+	  }, {
 	    key: 'getAddress',
-	    value: function getAddress(sale) {
+	    value: function getAddress(latitude, longitude) {
 	      var _this2 = this;
 
-	      var latlng = new google.maps.LatLng(sale.latitude, sale.longitude);
+	      var latlng = new google.maps.LatLng(latitude, longitude);
 	      var geocoder = new google.maps.Geocoder();
 	      var miAdress = geocoder.geocode({ 'location': latlng }, function (results, status) {
 	        if (status === 'OK') {
@@ -20419,19 +20436,6 @@
 	          }
 	        }
 	      });
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      var mysale = 'Loading';
-
-	      if (nextProps.sales.length > 0) {
-	        mysale = nextProps.sales.sort(function (a, b) {
-	          return b.sales - a.sales;
-	        });
-	      }
-	      this.setState({ saleSorted: mysale[0] });
-	      this.getAddress(mysale[0]);
 	    }
 	  }, {
 	    key: 'render',
@@ -20456,12 +20460,12 @@
 	          _react2.default.createElement(
 	            'a',
 	            { href: '#' },
-	            this.state.saleSorted.name,
+	            this.state.best.name,
 	            ' ',
 	            _react2.default.createElement(
 	              'span',
 	              { className: 'pull-right' },
-	              this.state.saleSorted.sales
+	              this.state.best.sales
 	            )
 	          ),
 	          ' '
