@@ -20401,10 +20401,10 @@
 	    var _this = _possibleConstructorReturn(this, (BestSeller.__proto__ || Object.getPrototypeOf(BestSeller)).call(this));
 
 	    _this.state = {
-	      address: 'puta address',
+	      address: 'Loading data...',
 	      best: {
-	        name: 'puto name',
-	        sales: '4 mierdas'
+	        name: 'Loading data...',
+	        sales: '--'
 	      }
 	    };
 	    _this.getAddress = _this.getAddress.bind(_this);

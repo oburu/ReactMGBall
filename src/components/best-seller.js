@@ -5,10 +5,10 @@ class BestSeller extends Component {
     super();
 
     this.state = {
-      address:'puta address',
+      address:'Loading data...',
       best: {
-        name:'puto name',
-        sales: '4 mierdas'
+        name:'Loading data...',
+        sales: '--'
       }
     }
     this.getAddress = this.getAddress.bind(this);
