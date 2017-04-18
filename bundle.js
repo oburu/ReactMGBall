@@ -75,6 +75,10 @@
 
 	var _total_reporting2 = _interopRequireDefault(_total_reporting);
 
+	var _bestSeller = __webpack_require__(165);
+
+	var _bestSeller2 = _interopRequireDefault(_bestSeller);
+
 	var _g_map = __webpack_require__(166);
 
 	var _g_map2 = _interopRequireDefault(_g_map);
@@ -102,6 +106,7 @@
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 	    _this.state = {
+	      orderedSales: [],
 	      sales: [],
 	      lastSale: '',
 	      loading: 'inline'
@@ -122,15 +127,53 @@
 	          sales: [sale].concat(_toConsumableArray(_this2.state.sales)),
 	          loading: 'none'
 	        });
+	        _this2.setOrderedSales(sale);
 	      });
+	    }
+	  }, {
+	    key: 'orderAsc',
+	    value: function orderAsc(a, b) {
+	      return b.sales - a.sales;
+	    }
+	  }, {
+	    key: 'setOrderedSales',
+	    value: function setOrderedSales(sale) {
+	      var _this3 = this;
+
+	      var bestSeller = [];
+	      if (this.state.orderedSales.length > 0) {
+	        bestSeller = this.state.orderedSales.filter(function (item, index) {
+	          if (index > 0) {
+	            return item.name === _this3.state.sales[0].name;
+	          }
+	        });
+	      }
+	      if (bestSeller.length > 0) {
+	        var newSeller = function newSeller(item, meti) {
+	          var sum = item.sales + meti.sales;
+	          return {
+	            name: item.name,
+	            sales: sum,
+	            laitude: item.latitude,
+	            longitude: item.longitude
+	          };
+	        };
+	        this.setState({
+	          orderedSales: [].concat(_toConsumableArray(this.state.orderedSales), [newSeller(bestSeller[0], this.state.sales[0])]).sort(this.orderAsc)
+	        });
+	      } else {
+	        this.setState({
+	          orderedSales: [].concat(_toConsumableArray(this.state.orderedSales), [sale]).sort(this.orderAsc)
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this3 = this;
+	      var _this4 = this;
 
 	      this._interval = setInterval(function () {
-	        _this3.getDataFromURL();
+	        _this4.getDataFromURL();
 	      }, 4000);
 	    }
 	  }, {
@@ -160,7 +203,12 @@
 	            'California, USA Sales'
 	          )
 	        ),
-	        _react2.default.createElement(_total_reporting2.default, { sales: sales }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'flex-container' },
+	          _react2.default.createElement(_total_reporting2.default, { sales: sales }),
+	          _react2.default.createElement(_bestSeller2.default, { bSeller: this.state.orderedSales[0] === undefined ? lastSale : this.state.orderedSales[0] })
+	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'flex-container' },
@@ -20257,7 +20305,7 @@
 /* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -20268,10 +20316,6 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _bestSeller = __webpack_require__(165);
-
-	var _bestSeller2 = _interopRequireDefault(_bestSeller);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20291,74 +20335,67 @@
 	  }
 
 	  _createClass(TotalReporting, [{
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      var totalSales = { sales: 0 };
 	      var price = 1.65;
-	      var bestSeller = {};
 
 	      if (this.props.sales.length > 0) {
-	        bestSeller = this.props.sales[0];
 	        totalSales = this.props.sales.reduce(function (a, b) {
 	          return { sales: a.sales + b.sales };
 	        });
 	      }
 
 	      return _react2.default.createElement(
-	        'div',
-	        { className: 'flex-container' },
+	        "div",
+	        { className: "col col-left" },
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'col col-left' },
+	          "h4",
+	          null,
+	          "Total reporting"
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          null,
+	          "Report of gum sold in the state of California, USA. All this data is coming from a sleepy RESTful api. "
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "row" },
 	          _react2.default.createElement(
-	            'h4',
-	            null,
-	            'Total reporting'
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'Report of gum sold in the state of California, USA. All this data is coming from a sleepy RESTful api. '
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'row' },
+	            "div",
+	            { className: "col-sm-6" },
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-sm-6' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Money Income (Price: \xA3 ',
-	                price,
-	                ' each)'
-	              ),
-	              _react2.default.createElement(
-	                'h1',
-	                null,
-	                '\xA3 ',
-	                (totalSales.sales * price).toFixed(2)
-	              )
+	              "h5",
+	              null,
+	              "Money Income (Price: \xA3 ",
+	              price,
+	              " each)"
 	            ),
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-sm-6' },
-	              _react2.default.createElement(
-	                'h5',
-	                null,
-	                'Amount Sold'
-	              ),
-	              _react2.default.createElement(
-	                'h1',
-	                null,
-	                ' ',
-	                totalSales.sales,
-	                ' '
-	              )
+	              "h1",
+	              null,
+	              "\xA3 ",
+	              (totalSales.sales * price).toFixed(2)
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "col-sm-6" },
+	            _react2.default.createElement(
+	              "h5",
+	              null,
+	              "Amount Sold"
+	            ),
+	            _react2.default.createElement(
+	              "h1",
+	              null,
+	              " ",
+	              totalSales.sales,
+	              " "
 	            )
 	          )
-	        ),
-	        _react2.default.createElement(_bestSeller2.default, { bSeller: bestSeller })
+	        )
 	      );
 	    }
 	  }]);
