@@ -83,7 +83,10 @@ class App extends Component {
     let {lastSale, sales, loading} = this.state;
     return (
       <div className="container">
-        <h3 className="page-title">MightyGumball Inc. <br/><small>California, USA Sales</small></h3>
+        <div className="top-dash">
+          <h3 className="page-title">MightyGumball Inc. <br/><small>California, USA Sales</small></h3>
+          <a href="https://github.com/oburu/ReactMGBall" className="btn btn-info">GitHub</a>
+        </div>
         <div className="flex-container">
           <TotalReporting sales={sales}/>
           {<BestSeller bSeller={this.state.orderedSales[0] === undefined ? lastSale : this.state.orderedSales[0]} />}

@@ -88,7 +88,22 @@ a.list-item:nth-child(1){
 	padding:20px;
 	display:block;
 }
+.top-dash{
+	display: flex;
+}
+.top-dash h3{
 
+}
+.top-dash .btn-info{
+	height:45px;
+	border-radius: 0;
+	margin-left: auto;
+	margin-top:25px;
+	margin-bottom: 0;
+	background-color: #2185e7;
+	border: none;
+	padding:13px 25px;;
+}
 /* ----- */
 
 
@@ -103,4 +118,14 @@ a.list-item:nth-child(1){
   .col-right{
     width:100%;
   }
+	.top-dash{
+		display:block;
+	}
+	.top-dash .btn-info{
+		height:45px;
+		margin-top: 0;
+		margin-bottom: 30px;
+		border-radius: 0;
+		margin-left: 0;
+	}
 }

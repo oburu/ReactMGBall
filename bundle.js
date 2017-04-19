@@ -196,14 +196,23 @@
 	        'div',
 	        { className: 'container' },
 	        _react2.default.createElement(
-	          'h3',
-	          { className: 'page-title' },
-	          'MightyGumball Inc. ',
-	          _react2.default.createElement('br', null),
+	          'div',
+	          { className: 'top-dash' },
 	          _react2.default.createElement(
-	            'small',
-	            null,
-	            'California, USA Sales'
+	            'h3',
+	            { className: 'page-title' },
+	            'MightyGumball Inc. ',
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'small',
+	              null,
+	              'California, USA Sales'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { href: 'https://github.com/oburu/ReactMGBall', className: 'btn btn-info' },
+	            'GitHub'
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -20667,6 +20676,12 @@
 	      var data = this.myLineChart.data.labels.length;
 	      this.myLineChart.data.datasets[0].data[data] = nextProps.lastSale.sales;
 	      this.myLineChart.data.labels[data] = nextProps.lastSale.name;
+
+	      if (this.myLineChart.data.labels.length > 20) {
+	        this.myLineChart.data.labels.shift();
+	        this.myLineChart.data.datasets[0].data.shift();
+	      }
+
 	      this.myLineChart.update();
 	    }
 	  }, {
@@ -20675,7 +20690,7 @@
 	      var config = {
 	        type: 'line',
 	        data: {
-	          labels: ['Starting'],
+	          labels: ['START'],
 	          datasets: [{
 	            label: "Sales",
 	            fill: true,

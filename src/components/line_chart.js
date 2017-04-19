@@ -11,6 +11,12 @@ export default class LineChart extends Component {
     let data = this.myLineChart.data.labels.length;
     this.myLineChart.data.datasets[0].data[data] = nextProps.lastSale.sales;
     this.myLineChart.data.labels[data] = nextProps.lastSale.name;
+
+    if(this.myLineChart.data.labels.length > 20){
+  		this.myLineChart.data.labels.shift();
+  		this.myLineChart.data.datasets[0].data.shift();
+  	}
+
     this.myLineChart.update();
   }
 
@@ -18,7 +24,7 @@ export default class LineChart extends Component {
     var config = {
       type: 'line',
       data: {
-        labels: ['Starting'],
+        labels: ['START'],
         datasets: [{
             label: "Sales",
             fill: true,
