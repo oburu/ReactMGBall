@@ -122,12 +122,7 @@
 	      fetch('https://mighty-gumball-api.herokuapp.com/mighty_gumball_api').then(function (response) {
 	        return response.json();
 	      }).then(function (sale) {
-	        _this2.setState({
-	          lastSale: sale,
-	          sales: [sale].concat(_toConsumableArray(_this2.state.sales)),
-	          loading: 'none'
-	        });
-	        _this2.setOrderedSales(sale);
+	        _this2.setArrays(sale);
 	      });
 	    }
 	  }, {
@@ -136,44 +131,52 @@
 	      return b.sales - a.sales;
 	    }
 	  }, {
-	    key: 'setOrderedSales',
-	    value: function setOrderedSales(sale) {
-	      var _this3 = this;
-
+	    key: 'generateOrderedSales',
+	    value: function generateOrderedSales(array, item, meti) {
+	      var sum = item.sales + meti.sales;
+	      var i = array.findIndex(function (e) {
+	        return e.name == item.name;
+	      });
+	      array.splice(i, 1);
+	      array[i] = {
+	        name: item.name,
+	        sales: sum,
+	        latitude: item.latitude,
+	        longitude: item.longitude,
+	        time: item.time
+	      };
+	      return array;
+	    }
+	  }, {
+	    key: 'setArrays',
+	    value: function setArrays(sale) {
 	      var bestSeller = [];
+	      var OGArray = [];
+	      var myArray = [];
+
 	      if (this.state.orderedSales.length > 0) {
-	        bestSeller = this.state.orderedSales.filter(function (item, index) {
-	          if (index > 0) {
-	            return item.name === _this3.state.sales[0].name;
-	          }
+	        myArray = this.state.orderedSales;
+	        bestSeller = myArray.filter(function (item, index) {
+	          return item.name === sale.name;
 	        });
 	      }
 	      if (bestSeller.length > 0) {
-	        var newSeller = function newSeller(item, meti) {
-	          var sum = item.sales + meti.sales;
-	          return {
-	            name: item.name,
-	            sales: sum,
-	            laitude: item.latitude,
-	            longitude: item.longitude
-	          };
-	        };
-	        this.setState({
-	          orderedSales: [].concat(_toConsumableArray(this.state.orderedSales), [newSeller(bestSeller[0], this.state.sales[0])]).sort(this.orderAsc)
-	        });
-	      } else {
-	        this.setState({
-	          orderedSales: [].concat(_toConsumableArray(this.state.orderedSales), [sale]).sort(this.orderAsc)
-	        });
+	        OGArray = this.generateOrderedSales(myArray, bestSeller[0], sale);
 	      }
+	      this.setState({
+	        lastSale: sale,
+	        orderedSales: OGArray.length > 0 ? OGArray.sort(this.orderAsc) : [sale].concat(_toConsumableArray(this.state.orderedSales)).sort(this.orderAsc),
+	        sales: [sale].concat(_toConsumableArray(this.state.sales)),
+	        loading: 'none'
+	      });
 	    }
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this4 = this;
+	      var _this3 = this;
 
 	      this._interval = setInterval(function () {
-	        _this4.getDataFromURL();
+	        _this3.getDataFromURL();
 	      }, 4000);
 	    }
 	  }, {

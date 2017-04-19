@@ -23,12 +23,7 @@ class App extends Component {
     fetch('https://mighty-gumball-api.herokuapp.com/mighty_gumball_api')
     .then(response => response.json())
     .then(sale => {
-      this.setState({
-        lastSale: sale,
-        sales: [sale, ...this.state.sales],
-        loading: 'none'
-      });
-      this.setOrderedSales(sale);
+      this.setArrays(sale);
     });
   }
 
@@ -36,33 +31,42 @@ class App extends Component {
   	return b.sales - a.sales;
   }
 
-  setOrderedSales(sale){
+  generateOrderedSales(array, item, meti){
+    let sum = item.sales + meti.sales;
+    let i = array.findIndex((e) => {
+      return e.name == item.name
+    });
+    array.splice(i, 1);
+    array[i] = {
+      name: item.name,
+      sales: sum,
+      latitude: item.latitude,
+      longitude: item.longitude,
+      time: item.time
+    }
+    return array;
+  }
+
+  setArrays(sale){
     let bestSeller =[];
+    let OGArray = [];
+    let myArray = [];
+
     if(this.state.orderedSales.length > 0){
-      bestSeller = this.state.orderedSales.filter((item,index)=>{
-        if(index > 0){
-          return item.name === this.state.sales[0].name;
-        }
+      myArray = this.state.orderedSales;
+      bestSeller = myArray.filter((item, index)=>{
+        return item.name === sale.name;
       });
     }
     if(bestSeller.length > 0){
-      const newSeller = (item, meti) =>{
-        let sum = item.sales + meti.sales
-        return {
-          name: item.name,
-          sales: sum,
-          laitude: item.latitude,
-          longitude: item.longitude
-        }
-      }
-      this.setState({
-        orderedSales: [ ...this.state.orderedSales, newSeller(bestSeller[0],this.state.sales[0])].sort(this.orderAsc)
-      })
-    }else{
-      this.setState({
-        orderedSales: [ ...this.state.orderedSales, sale].sort(this.orderAsc)
-      })
+      OGArray = this.generateOrderedSales(myArray, bestSeller[0], sale);
     }
+    this.setState({
+      lastSale: sale,
+      orderedSales: OGArray.length > 0 ? OGArray.sort(this.orderAsc)  : [sale, ...this.state.orderedSales].sort(this.orderAsc),
+      sales: [sale, ...this.state.sales],
+      loading: 'none'
+    });
   }
 
   componentDidMount() {
@@ -82,7 +86,7 @@ class App extends Component {
         <h3 className="page-title">MightyGumball Inc. <br/><small>California, USA Sales</small></h3>
         <div className="flex-container">
           <TotalReporting sales={sales}/>
-          <BestSeller bSeller={this.state.orderedSales[0] === undefined ? lastSale : this.state.orderedSales[0]} />
+          {<BestSeller bSeller={this.state.orderedSales[0] === undefined ? lastSale : this.state.orderedSales[0]} />}
         </div>
         <div className="flex-container">
           <div className="col col-left">
