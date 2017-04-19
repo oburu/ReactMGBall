@@ -21,9 +21,14 @@ body{
 }
 
 .total-sales-panel .list{
-  height: 310px;
+  height: 300px;
   overflow: scroll;
 }
+
+.total-sales-panel input{
+  margin-bottom: 15px;
+}
+
 #map{
   height:280px;
 }

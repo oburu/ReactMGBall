@@ -33,6 +33,7 @@ class App extends Component {
 
   generateOrderedSales(array, item, meti){
     let sum = item.sales + meti.sales;
+    let date = new Date();
     let i = array.findIndex((e) => {
       return e.name == item.name
     });
@@ -42,7 +43,8 @@ class App extends Component {
       sales: sum,
       latitude: item.latitude,
       longitude: item.longitude,
-      time: item.time
+      time: item.time,
+      createdAt: date.toLocaleTimeString('en-US')
     }
     return array;
   }
@@ -51,6 +53,8 @@ class App extends Component {
     let bestSeller =[];
     let OGArray = [];
     let myArray = [];
+    let date = new Date();
+    sale.createdAt = date.toLocaleTimeString('en-US');
 
     if(this.state.orderedSales.length > 0){
       myArray = this.state.orderedSales;
@@ -89,7 +93,7 @@ class App extends Component {
         </div>
         <div className="flex-container">
           <TotalReporting sales={sales}/>
-          {<BestSeller bSeller={this.state.orderedSales[0] === undefined ? lastSale : this.state.orderedSales[0]} />}
+          <BestSeller bSeller={this.state.orderedSales[0] === undefined ? lastSale : this.state.orderedSales[0]} />
         </div>
         <div className="flex-container">
           <div className="col col-left">

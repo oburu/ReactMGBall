@@ -134,6 +134,7 @@
 	    key: 'generateOrderedSales',
 	    value: function generateOrderedSales(array, item, meti) {
 	      var sum = item.sales + meti.sales;
+	      var date = new Date();
 	      var i = array.findIndex(function (e) {
 	        return e.name == item.name;
 	      });
@@ -143,7 +144,8 @@
 	        sales: sum,
 	        latitude: item.latitude,
 	        longitude: item.longitude,
-	        time: item.time
+	        time: item.time,
+	        createdAt: date.toLocaleTimeString('en-US')
 	      };
 	      return array;
 	    }
@@ -153,6 +155,8 @@
 	      var bestSeller = [];
 	      var OGArray = [];
 	      var myArray = [];
+	      var date = new Date();
+	      sale.createdAt = date.toLocaleTimeString('en-US');
 
 	      if (this.state.orderedSales.length > 0) {
 	        myArray = this.state.orderedSales;
@@ -20096,6 +20100,7 @@
 	    var _this = _possibleConstructorReturn(this, (SalesList.__proto__ || Object.getPrototypeOf(SalesList)).call(this));
 
 	    _this.state = {
+	      items: [],
 	      showModal: false,
 	      modalInfo: {
 	        name: '',
@@ -20114,9 +20119,20 @@
 	          name: shopInfo.name,
 	          sales: shopInfo.sales,
 	          latitude: shopInfo.latitude,
-	          longitude: shopInfo.longitude
+	          longitude: shopInfo.longitude,
+	          createdAt: shopInfo.createdAt
 	        }
 	      });
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({ items: nextProps.sales });
+	    }
+	  }, {
+	    key: 'filter',
+	    value: function filter(e) {
+	      this.setState({ filter: e.target.value });
 	    }
 	  }, {
 	    key: 'handleCloseModal',
@@ -20128,7 +20144,13 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      var salesItems = this.props.sales.map(function (sale, i) {
+	      var items = this.state.items;
+	      if (this.state.filter) {
+	        items = items.filter(function (item) {
+	          return item.name.toLowerCase().includes(_this2.state.filter.toLowerCase());
+	        });
+	      }
+	      var salesItems = items.map(function (sale, i) {
 	        return _react2.default.createElement(_sales_list_item2.default, { key: i, sale: sale, onItemClick: _this2.handleOpenModal.bind(_this2) });
 	      });
 	      var style = {
@@ -20149,7 +20171,8 @@
 	              { className: 'lead' },
 	              'Sold ',
 	              _this2.state.modalInfo.sales,
-	              ' gums.'
+	              ' gums at ',
+	              _this2.state.modalInfo.createdAt
 	            ),
 	            _react2.default.createElement(
 	              'p',
@@ -20162,7 +20185,7 @@
 	            _react2.default.createElement(
 	              'button',
 	              { className: 'btn btn-success', onClick: _this2.handleCloseModal.bind(_this2) },
-	              'Close'
+	              'OK'
 	            )
 	          );
 	        }
@@ -20176,6 +20199,7 @@
 	          null,
 	          'Latest sales'
 	        ),
+	        _react2.default.createElement('input', { type: 'text', className: 'form-control', onChange: this.filter.bind(this), placeholder: 'Search for...' }),
 	        _react2.default.createElement(
 	          'p',
 	          { style: style, className: 'lead' },
@@ -20466,7 +20490,8 @@
 	      this.setState({
 	        best: {
 	          name: nextProps.bSeller.name,
-	          sales: nextProps.bSeller.sales
+	          sales: nextProps.bSeller.sales,
+	          createdAt: nextProps.bSeller.createdAt
 	        }
 	      });
 	      this.getAddress(nextProps.bSeller.latitude, nextProps.bSeller.longitude);
@@ -20500,7 +20525,10 @@
 	        _react2.default.createElement(
 	          'p',
 	          null,
-	          'This is the faster selling store in the area.'
+	          'This is the faster selling store in the area. ',
+	          _react2.default.createElement('br', null),
+	          ' Data from today at ',
+	          this.state.best.createdAt
 	        ),
 	        _react2.default.createElement(
 	          'h4',

@@ -18,7 +18,8 @@ class BestSeller extends Component {
     this.setState({
       best: {
         name:nextProps.bSeller.name,
-        sales: nextProps.bSeller.sales
+        sales: nextProps.bSeller.sales,
+        createdAt: nextProps.bSeller.createdAt
       }
     });
     this.getAddress(nextProps.bSeller.latitude, nextProps.bSeller.longitude)
@@ -41,7 +42,7 @@ class BestSeller extends Component {
     return (
       <div className="col col-right">
         <h4>Best seller</h4>
-        <p>This is the faster selling store in the area.</p>
+        <p>This is the faster selling store in the area. <br/> Data from today at {this.state.best.createdAt}</p>
         <h4 className="best-seller"> <a href="#">{this.state.best.name} <span className="pull-right">{this.state.best.sales}</span></a> </h4>
         <p>{this.state.address}</p>
       </div>
